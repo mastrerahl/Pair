@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔱 Get Pair Code | Rahl Quantum</title>
+  <style>
+    body {
+      background-color: #001f3f; /* Dark Royal Blue */
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      color: #00BFFF;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      width: 250px;
+      border: 2px solid #0074D9;
+      border-radius: 5px;
+      outline: none;
+      margin-top: 1rem;
+      background-color: #f0f8ff;
+      color: #001f3f;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      margin-top: 1rem;
+      background-color: #0074D9;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005bb5;
+    }
+
+    #result {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #003366;
+      border-radius: 8px;
+      display: none;
+    }
+
+    strong {
+      color: #00BFFF;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔱 Rahl Quantum Panel</h1>
+  <h2>Link Your WhatsApp Device</h2>
+
+  <input type="text" id="number" placeholder="Enter number (e.g. 254712345678)" />
+  <br/>
+  <button onclick="getCode()">Get Pair Code</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function getCode() {
+      const number = document.getElementById('number').value.trim();
+      const result = document.getElementById('result');
+      result.style.display = "block";
+      result.innerText = "⏳ Requesting pair code...";
+
+      try {
+        const response = await fetch(`/pair?number=${number}`);
+        const data = await response.json();
+
+        if (data.pairingCode) {
+          result.innerHTML = `
+            ✅ <strong>Pairing Code:</strong><br/>
+            <span style="font-size: 1.5rem; color: #00BFFF;">${data.pairingCode}</span><br/><br/>
+            📲 Go to <strong>WhatsApp &gt
